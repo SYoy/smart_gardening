@@ -43,7 +43,8 @@ def index():
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         'moisture': s.moistureString,
         'running': s.running,
-        'filename': s.filename
+        'filename': s.filename,
+        'form': form
     }
     del sensor
     return render_template('index.html', **templateData)
@@ -79,15 +80,14 @@ def logAction(action):
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         'moisture': s.moistureString,
         'running': s.running,
-        'filename': s.filename
+        'filename': s.filename,
+        'form': form
     }
 
     return render_template('index.html', **templateData)
 
 @app.route('/filename', methods=['GET', 'POST'])
 def setFilename():
-
-    form = FileNameForm()
 
     if form.validate_on_submit():
         flash('filename changed to: {}.txt'.format(form.filename.data))
@@ -97,7 +97,8 @@ def setFilename():
             'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
             'moisture': s.moistureString,
             'running': s.running,
-            'filename': s.filename
+            'filename': s.filename,
+            'form': form
         }
         return render_template('index.html', **templateData)
     return render_template('oops.html')
@@ -105,5 +106,6 @@ def setFilename():
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
     s = state()
+    form = FileNameForm()
     # start app
     app.run(host='0.0.0.0', port=1080, debug=True)
