@@ -21,8 +21,9 @@ log_name = "default.txt"
 @nav.navigation()
 def mynavbar():
     return Navbar(
-        'mysite',
-        View('Home Page', 'index'),
+        'Smart Garden Project',
+        View('Overview', 'index'),
+        View('Insights', 'insights')
     )
 
 @app.route("/")

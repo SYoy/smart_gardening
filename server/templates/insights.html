@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href='../static/style.css'/>
+{% endblock %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block navbar %}
+{{nav.mynavbar.render()}}
+{% endblock %}
+
+{% block content %}
+nothing here yet ...
+{% endblock %}
