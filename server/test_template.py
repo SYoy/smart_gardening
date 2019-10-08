@@ -10,7 +10,7 @@ import os
 app = Flask(__name__)
 nav = Nav()
 nav.init_app(app)
-Bootstrap(app)
+bootstrap = Bootstrap(app)
 
 # init values
 moistureString = "?"
