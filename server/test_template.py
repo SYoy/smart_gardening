@@ -77,7 +77,7 @@ def logAction(action):
 
     return render_template('index.html', **templateData)
 
-@app.route("/set/filename/<name>")
+@app.route("/?new_filename=<name>")
 def setFilename(name):
     s.filename = name
     sensor = moisture_sensors.sensor()
