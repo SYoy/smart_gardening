@@ -1,15 +1,29 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
+from flask_nav import Nav
+from flask_nav.elements import Navbar, View
 from sensors import moisture_sensors
 import datetime
 import os
 
-log_name = "default.txt"
+#flask setup
 app = Flask(__name__)
+nav = Nav()
+nav.init_app(app)
 Bootstrap(app)
+
+# init values
 moistureString = "?"
 running = 0
+log_name = "default.txt"
 
+# navigation bar
+@nav.navigation()
+def mynavbar():
+    return Navbar(
+        'mysite',
+        View('index'),
+    )
 
 @app.route("/")
 def index():
