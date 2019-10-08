@@ -12,10 +12,11 @@ nav = Nav()
 nav.init_app(app)
 bootstrap = Bootstrap(app)
 
-# init values
-moistureString = "?"
-running = 0
-log_name = "default.txt"
+class state():
+    def __init__(self):
+        self.moistureString = "?"
+        self.running = 0
+        self.filename = "default"
 
 # navigation bar
 @nav.navigation()
@@ -34,7 +35,8 @@ def index():
         'title': 'moisture sensor',
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         'moisture': moistureString,
-        'running': running
+        'running': s.running,
+        'filename': s.filename
     }
     del sensor
     return render_template('index.html', **templateData)
@@ -43,38 +45,56 @@ def index():
 def insights():
     templateData = {
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-        'running': running
+        'running': s.running
     }
     return render_template('insights.html', **templateData)
 
 @app.route("/ms/<action>")
 def logAction(action):
-    logPath = os.path.join("/home/marius/smart_garden/logs/", log_name)
+    logPath = os.path.join("/home/marius/smart_garden/logs/", (s.filename+".txt"))
 
     if action == "start":
         try:
             t.start(logPath)
-            running = 1
+            s.running = 1
         except:
-            running = 0
+            s.running = 0
 
     elif action == "stop":
         try:
             t.stop()
-            running = 0
+            s.running = 0
         except:
-            running = 1
+            s.running = 1
 
     templateData = {
         'title': 'moisture sensor',
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-        'moisture': moistureString,
-        'running': running
+        'moisture': s.moistureString,
+        'running': s.running,
+        'filename': s.filename
     }
 
+    return render_template('index.html', **templateData)
+
+@app.route("/set/filename/<name>")
+def logAction(name):
+    s.filename = name
+    sensor = moisture_sensors.sensor()
+    s.moistureString = str(sensor.readI2c())
+    templateData = {
+        'title': 'moisture sensor',
+        'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+        'moisture': s.moistureString,
+        'running': s.running,
+        'filename': s.filename
+    }
+    del sensor
     return render_template('index.html', **templateData)
 
 
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
+    s = state()
+    # start app
     app.run(host='0.0.0.0', port=1080, debug=True)
