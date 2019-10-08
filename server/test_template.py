@@ -39,7 +39,7 @@ def index():
     del sensor
     return render_template('index.html', **templateData)
 
-@app.route("/")
+@app.route("/insights")
 def insights():
     templateData = {
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
