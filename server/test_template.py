@@ -30,11 +30,11 @@ def mynavbar():
 @app.route("/")
 def index():
     sensor = moisture_sensors.sensor()
-    moistureString = str(sensor.readI2c())
+    s.moistureString = str(sensor.readI2c())
     templateData = {
         'title': 'moisture sensor',
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-        'moisture': moistureString,
+        'moisture': s.moistureString,
         'running': s.running,
         'filename': s.filename
     }

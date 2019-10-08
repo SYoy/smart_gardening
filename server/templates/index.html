@@ -15,39 +15,18 @@
 {% endblock %}
 
 {% block content %}
-<h1>The date and time on the server is: {{ time }}</h1>
+<h3>RaspberryPi Zero W server time: {{ time }}</h3>
 <br>
-<h3>Moisture:
-    {% if running == 1 %}
-       moisture data being written to log-file
-    {% else %}
-       {{ moisture }}
-    {% endif %}</h3>
-
+Moisture:
+{% if running == 1 %}
+   moisture data being written to log-file
+{% else %}
+   {{ moisture }}
+{% endif %}
 <br>
 <br>
 
-<h1>Logging to local file:</h1>
-<br>
-<form action="/action_page.php">
-  filename: {{ filename }}
-    <br>
-  new name: <input type="text" name="filename" id="new_name">
-    <br>
-  <input href="/set/filename/ type="submit" value="Submit">
-</form>
-
-<form id="person">
-    filename: {{ filename }}
-    <br>
-    <label class="h2" form="person">Namenseingabe</label>
-    <label for="new_filename">Vorname</label>
-    <input type="text" name="new_filename" id="new_filename" maxlength="30">
-
-    <button class="button3" type="reset">RESET</button>
-    <button class="button2" type="submit">SUBMIT</button>
-</form>
-
+<h3>Logging to local file:</h3>
 <br>
 <h3>{% if running == 1 %}
        <a href="/ms/stop"class="button1">STOP</a>
@@ -55,4 +34,21 @@
        <a href="/ms/start" class="button1">START</a>
 {% endif %}
   logging </h3>
+
+<br>
+<br>
+<form id="filename">
+    filename: {{ filename }}
+    <br>
+    <label class="h2" form="filename">Change Filename</label>
+
+    current filename: {{ filename }}<br>
+
+    <label for="new_filename">new filename</label>
+    <input type="text" name="new_filename" id="new_filename" maxlength="30">
+
+    <button class="button3" type="reset">RESET</button>
+    <button class="button2" type="submit">SUBMIT</button>
+</form>
+
 {% endblock %}
