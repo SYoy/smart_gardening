@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from sensors import moisture_sensors
-import time
 import datetime
 import os
 
