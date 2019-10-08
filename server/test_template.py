@@ -22,7 +22,7 @@ log_name = "default.txt"
 def mynavbar():
     return Navbar(
         'mysite',
-        View('index'),
+        View('Home Page', 'index'),
     )
 
 @app.route("/")
