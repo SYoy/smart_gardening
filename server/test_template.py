@@ -1,7 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, request, redirect
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired
 from sensors import moisture_sensors
 import datetime
 import os
@@ -17,6 +20,10 @@ class state():
         self.moistureString = "?"
         self.running = 0
         self.filename = "default"
+
+class FileNameForm(FlaskForm):
+    filename = StringField('new filename:', validators=[DataRequired()])
+    submit = SubmitField('change filename')
 
 # navigation bar
 @nav.navigation()
@@ -77,21 +84,23 @@ def logAction(action):
 
     return render_template('index.html', **templateData)
 
-@app.route("/?new_filename=<name>")
-def setFilename(name):
-    s.filename = name
-    sensor = moisture_sensors.sensor()
-    s.moistureString = str(sensor.readI2c())
-    templateData = {
-        'title': 'moisture sensor',
-        'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-        'moisture': s.moistureString,
-        'running': s.running,
-        'filename': s.filename
-    }
-    del sensor
-    return render_template('index.html', **templateData)
+@app.route('/filename', methods=['GET', 'POST'])
+def setFilename():
 
+    form = FileNameForm()
+
+    if form.validate_on_submit():
+        flash('filename changed to: {}.txt'.format(form.filename.data))
+        s.filename = form.filename.data
+        templateData = {
+            'title': 'moisture sensor',
+            'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+            'moisture': s.moistureString,
+            'running': s.running,
+            'filename': s.filename
+        }
+        return render_template('index.html', **templateData)
+    return render_template('oops.html')
 
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
