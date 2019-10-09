@@ -38,7 +38,7 @@ a:hover, a:focus, a:active, a:visited {
 }
 .btn-yellow {
 	background-color: #3bfc5b;
-	color: #2a2a2a;
+	color: #ffffff;
 	opacity: 0.8;
 }
 .btn-yellow:hover {
@@ -184,7 +184,7 @@ a span.ti-twitter-alt {
 }
 
 .tickets {
-	background-color: #9beb34;
+	background-color: #71b53a;
 }
 .tickets .price {
 	font-size: 4em;
