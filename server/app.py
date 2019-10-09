@@ -6,6 +6,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 from modules import moisture_sensors
+from modules import watering
 import datetime
 import os
 
@@ -77,8 +78,17 @@ def logAction(action):
 
     return redirect(url_for('index'))
 
+@app.route("/toggle/<seconds>")
+def toggleWater(seconds):
+    if seconds < 10:
+        r.toggleFor(seconds)
+
+    return redirect(url_for('index'))
+
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
+    r = watering.relais()
+    r.initialize()
     s = state()
     # start app
     app.run(host='0.0.0.0', port=8080, debug=True)
