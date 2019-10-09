@@ -103,7 +103,7 @@
             <p>{% if running == 1 %}
                        <a href="/stop" class="btn btn-lg btn-red">STOP</a>
                 {% else %}
-                       <a href="/start" class="btn btn-lg btn-red">START</a>
+                       <a href="/start" class="btn btn-lg btn-yellow">START</a>
                 {% endif %}
             </p>
           </div>
@@ -113,11 +113,11 @@
               {{ form.hidden_tag() }}
               <br>
               <p>
-                  {{ form.filename.label }}
+              <h3>{{ form.filename.label }}</h3>
                   {{ form.filename(size=32) }}
               </p>
               <br>
-              <p>{{ form.submit(class="btn btn-lg btn-red") }}</p>
+              <p>{{ form.submit(class="btn btn-lg btn-yellow") }}</p>
             </form>
           </div>
         </div>
