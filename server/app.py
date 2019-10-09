@@ -80,8 +80,8 @@ def logAction(action):
 
 @app.route("/toggle/<seconds>")
 def toggleWater(seconds):
-    if seconds < 10:
-        r.toggleFor(seconds)
+    if int(seconds) < 10:
+        r.toggleFor(int(seconds))
 
     return redirect(url_for('index'))
 
