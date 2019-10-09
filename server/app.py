@@ -38,9 +38,10 @@ def create_figure():
 
     # Create a trace
     trace = go.Scatter(x=xScale, y=yScale)
-    data = [trace]
+    fig = go.Figure(trace)
+    div = plotly.offline.plot(fig, show_link=False, output_type="div", include_plotlyjs=False)
 
-    return json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+    return div
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index", methods=['GET', 'POST'])
@@ -54,14 +55,14 @@ def index():
     sensor = moisture_sensors.sensor()
     s.moistureString = str(sensor.readI2c())
 
-    graph  = create_figure()
+    div  = create_figure()
     templateData = {
         'title': 'moisture sensor',
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         'moisture': s.moistureString,
         'running': s.running,
         'filename': s.filename,
-        'plot': graph,
+        'div': div,
         'form': form
     }
     del sensor
