@@ -94,7 +94,7 @@ def logAction(action):
         'form': form
     }
 
-    return redirect(url_for('.index_sp', **templateData))
+    return redirect('index_sp', **templateData)
 
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
