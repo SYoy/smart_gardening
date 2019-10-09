@@ -35,7 +35,23 @@ def mynavbar():
     )
 
 @app.route("/")
+@app.route('/filename', methods=['GET', 'POST'])
 def index():
+
+    form = FileNameForm()
+    if form.validate_on_submit():
+        # flash('filename changed to: {}.txt'.format(form.filename.data))
+        s.filename = form.filename.data
+        templateData = {
+            'title': 'moisture sensor',
+            'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+            'moisture': s.moistureString,
+            'running': s.running,
+            'filename': s.filename,
+            'form': form
+        }
+        return render_template('index.html', **templateData)
+
     sensor = moisture_sensors.sensor()
     s.moistureString = str(sensor.readI2c())
     templateData = {
@@ -75,6 +91,7 @@ def logAction(action):
         except:
             s.running = 1
 
+    form = FileNameForm()
     templateData = {
         'title': 'moisture sensor',
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
@@ -86,26 +103,8 @@ def logAction(action):
 
     return render_template('index.html', **templateData)
 
-@app.route('/filename', methods=['GET', 'POST'])
-def setFilename():
-
-    if form.validate_on_submit():
-        flash('filename changed to: {}.txt'.format(form.filename.data))
-        s.filename = form.filename.data
-        templateData = {
-            'title': 'moisture sensor',
-            'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-            'moisture': s.moistureString,
-            'running': s.running,
-            'filename': s.filename,
-            'form': form
-        }
-        return render_template('index.html', **templateData)
-    return render_template('oops.html')
-
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
     s = state()
-    form = FileNameForm()
     # start app
     app.run(host='0.0.0.0', port=1080, debug=True)
