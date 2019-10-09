@@ -43,7 +43,7 @@ def index():
             'filename': s.filename,
             'form': form
         }
-        return redirect(url_for('index_sp.html', **templateData))
+        return redirect(url_for('index_sp', **templateData))
 
     sensor = moisture_sensors.sensor()
     s.moistureString = str(sensor.readI2c())
@@ -94,7 +94,7 @@ def logAction(action):
         'form': form
     }
 
-    return redirect(url_for('index_sp.html', **templateData))
+    return redirect(url_for('index_sp', **templateData))
 
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
