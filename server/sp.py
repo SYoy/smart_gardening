@@ -28,23 +28,23 @@ class FileNameForm(FlaskForm):
     submit = SubmitField('change filename')
 
 @app.route("/")
-@app.route("/index_sp")
+@app.route("/index")
 @app.route('/filename', methods=['GET', 'POST'])
 def index():
 
     form = FileNameForm()
     if form.validate_on_submit():
-        # flash('filename changed to: {}.txt'.format(form.filename.data))
         s.filename = form.filename.data
-        templateData = {
-            'title': 'moisture sensor',
-            'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-            'moisture': s.moistureString,
-            'running': s.running,
-            'filename': s.filename,
-            'form': form
-        }
-        return redirect(url_for('index_sp', **templateData))
+        # templateData = {
+        #     'title': 'moisture sensor',
+        #     'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+        #     'moisture': s.moistureString,
+        #     'running': s.running,
+        #     'filename': s.filename,
+        #     'form': form
+        # }
+
+        return redirect(url_for('index', **templateData))
 
     sensor = moisture_sensors.sensor()
     s.moistureString = str(sensor.readI2c())
@@ -85,17 +85,17 @@ def logAction(action):
         except:
             s.running = 1
 
-    form = FileNameForm()
-    templateData = {
-        'title': 'moisture sensor',
-        'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-        'moisture': s.moistureString,
-        'running': s.running,
-        'filename': s.filename,
-        'form': form
-    }
+    # form = FileNameForm()
+    # templateData = {
+    #     'title': 'moisture sensor',
+    #     'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+    #     'moisture': s.moistureString,
+    #     'running': s.running,
+    #     'filename': s.filename,
+    #     'form': form
+    # }
 
-    return redirect(url_for('index_sp', **templateData))
+    return redirect(url_for('index', **templateData))
 
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
