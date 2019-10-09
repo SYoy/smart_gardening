@@ -35,13 +35,13 @@
             </a>
           </li>
           <li>
-            <a href="#speakers" class="page-scroll">
+            <a href="#live_status" class="page-scroll">
               <span class="menu-title">Status</span>
               <span class="dot"></span>
             </a>
           </li>
           <li>
-            <a href="#tickets" class="page-scroll">
+            <a href="#logging" class="page-scroll">
               <span class="menu-title">Logging & Watering</span>
               <span class="dot"></span>
             </a>
@@ -67,7 +67,7 @@
       </div>
       <div class="container">
         <!-- Start: Desc -->
-        <div class="row me-row content-ct">
+        <div class="row me-row content-ct" id="live_status">
           <h2 class="row-title">Live Status</h2>
           <div class="col-md-4 feature">
             <span class="ti-signal"></span>
@@ -96,7 +96,7 @@
       <div class="container-fluid tickets" id="logging">
         <div class="row me-row content-ct">
           <h2 class="row-title">Logging</h2>
-          <h3> (current filename: {{ filename }})</h3>
+          <h3> (current filename: {{ filename }}.txt)</h3>
           <div class="col-md-4 col-sm-6 col-md-offset-2">
             <h3>log data to local file</h3>
             <br>
