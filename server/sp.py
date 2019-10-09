@@ -83,17 +83,7 @@ def logAction(action):
         except:
             s.running = 1
 
-    form = FileNameForm()
-    templateData = {
-        'title': 'moisture sensor',
-        'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-        'moisture': s.moistureString,
-        'running': s.running,
-        'filename': s.filename,
-        'form': form
-    }
-
-    return render_template('index_sp.html', **templateData)
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
