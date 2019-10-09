@@ -65,7 +65,7 @@ def insights():
     }
     return render_template('insights.html', **templateData)
 
-@app.route("/ms/<action>")
+@app.route("/<action>")
 def logAction(action):
     logPath = os.path.join("/home/marius/smart_garden/logs/", (s.filename+".txt"))
 
