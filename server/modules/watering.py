@@ -14,8 +14,10 @@ class relais():
     def toggle(self):
         if self.status:
             GPIO.output(self.gpio, GPIO.LOW)
+            self.status = 0
         elif not self.status:
             GPIO.output(self.gpio, GPIO.HIGH)
+            self.status = 1
 
     def toggleFor(self, seconds):
         self.toggle()
