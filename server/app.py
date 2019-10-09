@@ -5,7 +5,7 @@ from flask_nav.elements import Navbar, View
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
-from sensors import moisture_sensors
+from modules import moisture_sensors
 import datetime
 import os
 
