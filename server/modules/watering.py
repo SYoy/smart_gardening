@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 class relais():
-    def __index__(self):
+    def __init__(self):
         self.gpio = 10
 
     def initialize(self):
