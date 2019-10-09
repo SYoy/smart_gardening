@@ -38,8 +38,8 @@ def create_figure():
 
     # Create a trace
     trace = go.Scatter(x=xScale, y=yScale)
-    # fig = go.Figure(trace)
-    div = plotly.offline.plot(trace, show_link=False, output_type="div")
+    fig = go.Figure(trace)
+    div = plotly.offline.plot(fig, show_link=False, output_type="div")
 
     return div
 
