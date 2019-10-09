@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, request, redirect
+from flask import Flask, render_template, flash, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
@@ -27,15 +27,6 @@ class FileNameForm(FlaskForm):
     filename = StringField('new filename:', validators=[DataRequired()])
     submit = SubmitField('change filename')
 
-# navigation bar
-@nav.navigation()
-def mynavbar():
-    return Navbar(
-        'Smart Garden Project',
-        View('Overview', 'index_sp'),
-        View('Insights', 'insights')
-    )
-
 @app.route("/")
 @app.route('/filename', methods=['GET', 'POST'])
 def index():
@@ -52,7 +43,7 @@ def index():
             'filename': s.filename,
             'form': form
         }
-        return render_template('index_sp.html', **templateData)
+        return redirect(url_for('index_sp.html', **templateData))
 
     sensor = moisture_sensors.sensor()
     s.moistureString = str(sensor.readI2c())
@@ -103,7 +94,7 @@ def logAction(action):
         'form': form
     }
 
-    return render_template('index_sp.html', **templateData)
+    return redirect(url_for('index_sp.html', **templateData))
 
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
