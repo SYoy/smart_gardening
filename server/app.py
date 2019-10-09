@@ -62,7 +62,7 @@ def index():
         'moisture': s.moistureString,
         'running': s.running,
         'filename': s.filename,
-        'div': div,
+        'div1': div,
         'form': form
     }
     del sensor
