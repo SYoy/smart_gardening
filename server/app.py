@@ -8,7 +8,6 @@ from modules import moisture_sensors
 from modules import watering
 import plotly
 import plotly.graph_objs as go
-import json
 import datetime
 import os
 import random
@@ -33,11 +32,17 @@ class FileNameForm(FlaskForm):
 
 def create_figure():
     count = 25
-    xScale = [i for i in range(0,count)]
-    yScale = [random.randint(135, 213)  for i in range(0,count)]
+    xScale = [i for i in range(0, count)]
+    yScale = [random.randint(135, 213)  for i in range(0, count)]
+
+    layout = go.Layout(
+        autosize=True,
+        paper_bgcolor='#7f7f7f',
+        plot_bgcolor='#c7c7c7'
+    )
 
     # Create a trace
-    trace = go.Scatter(x=xScale, y=yScale)
+    trace = go.Scatter(x=xScale, y=yScale, layout=layout)
     fig = go.Figure(trace)
     div = plotly.offline.plot(fig, show_link=False, output_type="div")
 
