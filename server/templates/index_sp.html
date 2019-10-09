@@ -142,7 +142,9 @@
             <h3>moisture measurement</h3>
             <p>coming soon...</p>
           </div>
-          {{ div1 }}
+
+          {{ div1 | safe }}
+
           <div class="col-md-4 col-sm-6 feature">
             <span class="ti-light-bulb"></span>
             <h3>light track</h3>
@@ -164,7 +166,6 @@
       <script src="static/js/jquery.easing.min.js"></script>
       <script src="static/js/scrolling-nav.js"></script>
       <script src="static/js/validator.js"></script>
-      <!-- D3.js -->
       <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
       <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
 
