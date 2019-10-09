@@ -140,7 +140,12 @@
             <span class="ti-signal"></span>
             <h3>moisture measurement</h3>
             <p>test visualization:</p>
-            <div id="chart" class="chart">
+            <div class="chart" id="bargraph">
+            <script>
+                var graphs = {{plot | safe}};
+                Plotly.plot('bargraph',graphs,{});
+            </script>
+            </div>
           </div>
 
           <div class="col-md-4 col-sm-6 feature">
@@ -169,14 +174,6 @@
       <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
       <!-- Plotly.js -->
       <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
-
-      <script type="text/javascript">
-
-          var graphs = {{graphJSON | safe}};
-
-          Plotly.plot('chart',graphs,{});
-
-      </script>
 
     </body>
     </html>
