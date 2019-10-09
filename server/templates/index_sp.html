@@ -68,14 +68,14 @@
       <div class="container">
         <!-- Start: Desc -->
         <div class="row me-row content-ct">
-          <h2 class="row-title">Live Status: coming soon</h2>
+          <h2 class="row-title">Live Status</h2>
           <div class="col-md-4 feature">
             <span class="ti-signal"></span>
             <h3>Moisture:</h3>
             <p>{% if running == 1 %}
-                    moisture data being written to log-file
+                    data being written to file
                 {% else %}
-                    {{ moisture }}
+                    <b>{{ moisture }}</b>
                 {% endif %}</p>
           </div>
           <div class="col-md-4 feature">
