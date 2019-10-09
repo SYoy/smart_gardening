@@ -19,7 +19,7 @@ import random
 app = Flask(__name__)
 nav = Nav()
 nav.init_app(app)
-bootstrap = Bootstrap(app)y
+bootstrap = Bootstrap(app)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
