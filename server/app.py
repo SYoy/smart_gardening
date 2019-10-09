@@ -5,8 +5,11 @@ from flask_nav.elements import Navbar, View
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
+from bokeh.plotting import figure, output_file, show
+from bokeh.embed import components
 from modules import moisture_sensors
 from modules import watering
+import pandas as pd
 import datetime
 import os
 
@@ -28,6 +31,11 @@ class FileNameForm(FlaskForm):
     filename = StringField('new filename:', validators=[DataRequired()])
     submit = SubmitField('change filename')
 
+def create_figure():
+    p = figure(plot_width=400, plot_height=400)
+    p.line([1, 2, 3, 4, 5], [6, 7, 2, 4, 5], line_width=2)
+    return p
+
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index", methods=['GET', 'POST'])
 def index():
@@ -39,12 +47,18 @@ def index():
 
     sensor = moisture_sensors.sensor()
     s.moistureString = str(sensor.readI2c())
+
+    plot = create_figure()
+    script, div = components(plot)
+
     templateData = {
         'title': 'moisture sensor',
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         'moisture': s.moistureString,
         'running': s.running,
         'filename': s.filename,
+        'script': script,
+        'div': div,
         'form': form
     }
     del sensor
