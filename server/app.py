@@ -37,7 +37,7 @@ def create_figure():
     yScale = [random.randint(135, 213)  for i in range(0,count)]
 
     # Create a trace
-    trace = go.Scatter(x=xScale, y=yScale,width=200, height=300)
+    trace = go.Scatter(x=xScale, y=yScale)
     data = [trace]
 
     return json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
