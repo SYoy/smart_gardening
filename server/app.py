@@ -1,14 +1,12 @@
-from flask import Flask, render_template, flash, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
-from flask_nav.elements import Navbar, View
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from modules import moisture_sensors
 from modules import watering
 import plotly
-import plotly.plotly as py
 import plotly.graph_objs as go
 import json
 import datetime
