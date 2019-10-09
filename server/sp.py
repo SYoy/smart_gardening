@@ -27,9 +27,8 @@ class FileNameForm(FlaskForm):
     filename = StringField('new filename:', validators=[DataRequired()])
     submit = SubmitField('change filename')
 
-@app.route("/")
-@app.route("/index")
-@app.route('/filename', methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/index", methods=['GET', 'POST'])
 def index():
 
     form = FileNameForm()
@@ -43,7 +42,6 @@ def index():
         #     'filename': s.filename,
         #     'form': form
         # }
-
         return redirect(url_for('index'))#, **templateData))
 
     sensor = moisture_sensors.sensor()
@@ -85,17 +83,17 @@ def logAction(action):
         except:
             s.running = 1
 
-    # form = FileNameForm()
-    # templateData = {
-    #     'title': 'moisture sensor',
-    #     'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-    #     'moisture': s.moistureString,
-    #     'running': s.running,
-    #     'filename': s.filename,
-    #     'form': form
-    # }
+    form = FileNameForm()
+    templateData = {
+        'title': 'moisture sensor',
+        'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+        'moisture': s.moistureString,
+        'running': s.running,
+        'filename': s.filename,
+        'form': form
+    }
 
-    return redirect(url_for('index'))#, **templateData))
+    return render_template('index_sp.html', **templateData)
 
 if __name__ == "__main__":
     t = moisture_sensors.ThreadedSensor()
