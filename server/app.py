@@ -34,15 +34,7 @@ def index():
     form = FileNameForm()
     if form.validate_on_submit():
         s.filename = form.filename.data
-        # templateData = {
-        #     'title': 'moisture sensor',
-        #     'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
-        #     'moisture': s.moistureString,
-        #     'running': s.running,
-        #     'filename': s.filename,
-        #     'form': form
-        # }
-        return redirect(url_for('index'))#, **templateData))
+        return redirect(url_for('index'))
 
     sensor = moisture_sensors.sensor()
     s.moistureString = str(sensor.readI2c())
