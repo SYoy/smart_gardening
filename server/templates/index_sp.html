@@ -111,9 +111,9 @@
           <div class="col-md-4 col-sm-6">
             <form action="/index" method="post" novalidate id="filename">
               {{ form.hidden_tag() }}
+              <h3>new filename</h3>
               <br>
               <p>
-              <h3>{{ form.filename.label }}</h3>
                   {{ form.filename(size=32) }}
               </p>
               <br>
