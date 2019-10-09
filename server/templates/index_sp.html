@@ -139,10 +139,8 @@
           <div class="col-md-4 col-sm-6 feature">
             <span class="ti-signal"></span>
             <h3>moisture measurement</h3>
-            <p>coming soon...</p>
             <p>test visualization:</p>
-              {{ script|safe }}
-              {{ div|safe }}
+            <div id="chart" class="chart">
           </div>
 
           <div class="col-md-4 col-sm-6 feature">
@@ -166,6 +164,19 @@
       <script src="static/js/jquery.easing.min.js"></script>
       <script src="static/js/scrolling-nav.js"></script>
       <script src="static/js/validator.js"></script>
+      <!-- D3.js -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+      <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+      <!-- Plotly.js -->
+      <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+
+      <script type="text/javascript">
+
+          var graphs = {{graphJSON | safe}};
+
+          Plotly.plot('chart',graphs,{});
+
+      </script>
 
     </body>
     </html>

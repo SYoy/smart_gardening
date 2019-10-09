@@ -1,0 +1,15 @@
+Click
+Flask
+Flask-Bootstrap
+Flask-WTF
+Jinja2
+MarkupSafe
+WTForms
+Werkzeug
+dominate
+flask-nav
+itsdangerous
+pip
+setuptools
+visitor
+plotly

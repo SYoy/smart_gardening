@@ -5,18 +5,21 @@ from flask_nav.elements import Navbar, View
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
-from bokeh.plotting import figure, output_file, show
-from bokeh.embed import components
 from modules import moisture_sensors
 from modules import watering
+import plotly
+import plotly.plotly as py
+import plotly.graph_objs as go
+import json
 import datetime
 import os
+import random
 
 #flask setup
 app = Flask(__name__)
 nav = Nav()
 nav.init_app(app)
-bootstrap = Bootstrap(app)
+bootstrap = Bootstrap(app)y
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
@@ -31,9 +34,15 @@ class FileNameForm(FlaskForm):
     submit = SubmitField('change filename')
 
 def create_figure():
-    p = figure(plot_width=400, plot_height=400)
-    p.line([1, 2, 3, 4, 5], [6, 7, 2, 4, 5], line_width=2)
-    return p
+    count = 25
+    xScale = [i for i in range(0,count)]
+    yScale = [random.randint(135, 213)  for i in range(0,count)]
+
+    # Create a trace
+    trace = go.Scatter(x=xScale, y=yScale,width=200, height=300)
+    data = [trace]
+
+    return json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/index", methods=['GET', 'POST'])
@@ -47,17 +56,14 @@ def index():
     sensor = moisture_sensors.sensor()
     s.moistureString = str(sensor.readI2c())
 
-    plot = create_figure()
-    script, div = components(plot)
-
+    graph  = create_figure()
     templateData = {
         'title': 'moisture sensor',
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         'moisture': s.moistureString,
         'running': s.running,
         'filename': s.filename,
-        'script': script,
-        'div': div,
+        'graphJSON': graph,
         'form': form
     }
     del sensor
