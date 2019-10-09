@@ -9,11 +9,14 @@ from sensors import moisture_sensors
 import datetime
 import os
 
+
 #flask setup
 app = Flask(__name__)
 nav = Nav()
 nav.init_app(app)
 bootstrap = Bootstrap(app)
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
 
 class state():
     def __init__(self):
