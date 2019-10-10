@@ -6,6 +6,10 @@ class relais():
         self.gpio = 10
 
     def initialize(self):
+        try:
+            GPIO.cleanup()
+        except:
+            pass
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.gpio, GPIO.OUT)
         GPIO.output(self.gpio, GPIO.HIGH)
