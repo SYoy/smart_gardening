@@ -6,11 +6,13 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from modules import moisture_sensors
 from modules import watering
+from apscheduler.schedulers.background import BackgroundScheduler
 import plotly
 import plotly.graph_objs as go
 import datetime
 import os
 import random
+
 
 #flask setup
 app = Flask(__name__)
@@ -19,6 +21,7 @@ nav.init_app(app)
 bootstrap = Bootstrap(app)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
+scheduler = BackgroundScheduler()
 
 class state():
     def __init__(self):
@@ -29,6 +32,10 @@ class state():
 class FileNameForm(FlaskForm):
     filename = StringField('new filename:', validators=[DataRequired()])
     submit = SubmitField('change filename')
+
+def jobEveryHour():
+    print('hourly job started')
+    return
 
 def create_figure():
     count = 25
@@ -111,5 +118,7 @@ if __name__ == "__main__":
     r = watering.relais()
     r.initialize()
     s = state()
+    job = scheduler.add_job(jobEveryHour(), 'interval', minutes=1)# set to hour
+    scheduler.start()
     # start app
     app.run(host='0.0.0.0', port=8080, debug=True)
