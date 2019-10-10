@@ -58,14 +58,14 @@ def index():
     sensor = moisture_sensors.sensor()
     s.moistureString = str(sensor.readI2c())
 
-    div = create_figure()
+    # div = create_figure()
     templateData = {
         'title': 'moisture sensor',
         'time': datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
         'moisture': s.moistureString,
         'running': s.running,
         'filename': s.filename,
-        'div1': div,
+        # 'div1': div,
         'form': form
     }
     del sensor
