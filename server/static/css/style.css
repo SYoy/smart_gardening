@@ -52,9 +52,9 @@ a:hover, a:focus, a:active, a:visited {
 	text-align: center;
 }
 
-.link
+.link-invisible
 {
-   color:aqua;
+   color: none;
    text-decoration: none;
    background-color: none;
 }
