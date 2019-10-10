@@ -120,4 +120,4 @@ if __name__ == "__main__":
     job = scheduler.add_job(jobEveryHour, 'interval', minutes=1) # set to hour
     scheduler.start()
     # start app
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True, use_reloader=False)
