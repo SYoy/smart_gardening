@@ -34,7 +34,7 @@ class FileNameForm(FlaskForm):
     submit = SubmitField('change filename')
 
 def jobEveryHour():
-    print('hourly job started')
+    print('minutely job for testing')
 
 def create_figure():
     count = 25
