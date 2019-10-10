@@ -117,7 +117,7 @@ if __name__ == "__main__":
     r = watering.relais()
     r.initialize()
     s = state()
-    job = scheduler.add_job(jobEveryHour(), 'interval', minutes=1) # set to hour
+    job = scheduler.add_job(jobEveryHour, 'interval', minutes=1) # set to hour
     scheduler.start()
     # start app
     app.run(host='0.0.0.0', port=8080, debug=True)
