@@ -26,7 +26,7 @@ class sensor(object):
 
 class ThreadedSensor(object):
 
-    def __init__(self, intervall=1):
+    def __init__(self, intervall=10):
         self.interval = intervall
         self._stop = False
 
