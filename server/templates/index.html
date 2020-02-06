@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Smart Gardening single page APP">
+  <meta name="description" content="Smart Gardening APP">
   <meta name="author" content="Marius Steger">
   <title>Smart Gardening single page APP</title>
 
@@ -37,22 +37,23 @@
           </li>
           <li>
             <a href="#live_status" class="page-scroll">
-              <span class="menu-title">Status</span>
+              <span class="menu-title">Status & Watering</span>
+              <span class="dot"></span>
+            </a>
+          </li>
+          <li>
+            <a href="#features" class="page-scroll">
+              <span class="menu-title">Feature Menu</span>
               <span class="dot"></span>
             </a>
           </li>
           <li>
             <a href="#logging" class="page-scroll">
-              <span class="menu-title">Logging & Watering</span>
+              <span class="menu-title">Logging</span>
               <span class="dot"></span>
             </a>
           </li>
-          <li>
-            <a href="#monitoring" class="page-scroll">
-              <span class="menu-title">Monitoring</span>
-              <span class="dot"></span>
-            </a>
-          </li>
+
         </ul>
       </nav>
 
@@ -101,8 +102,41 @@
         <!-- End: Desc -->
       </div>
 
+      <!-- Start: monitoring -->
+        <div class="row me-row content-ct speaker" id="features">
+          <h2 class="row-title">Features</h2>
+          <a style="display:block" href="/plants">
+          <div class="col-md-4 col-sm-6 feature link-invisible">
+            <span class="ti-settings"></span>
+            <h3>Plant seeds!</h3>
+            <p>Select plants and change settings</p>
+            <img src="static/img/vis_1.png" style="max-height:60%;max-width:60%;">
+          </div>
+          </a>
+
+          <a style="display:block" href="/insights">
+          <div class="col-md-4 col-sm-6 feature">
+            <span class="ti-dashboard"></span>
+            <h3>Insights</h3>
+            <p>Data analysis and exploration</p>
+            <img src="static/img/vis_3.png" style="max-height:60%;max-width:60%;">
+          </div>
+          </a>
+
+          <a style="display:block" href="#live_status">
+          <div class="col-md-4 col-sm-6 feature">
+            <span class="ti-paint-bucket"></span>
+            <h3>watering charts</h3>
+            <p>coming soon...</p>
+            <!--<img src="static/img/vis_3.png" style="max-height:60%;max-width:60%;">-->
+          </div>
+          </a>
+        </div>
+
+        <!-- End: monitoring -->
+
       <!-- Start: logging -->
-      <div class="container-fluid tickets" id="logging">
+      <div class="container-fluid feature" id="logging" style="background: #4b8f29">
         <div class="row me-row content-ct">
           <h2 class="row-title">Logging</h2>
           <h3> (current filename: {{ filename }}.txt)</h3>
@@ -132,39 +166,6 @@
         </div>
       </div>
       <!-- End: logging -->
-
-      <!-- Start: monitoring -->
-        <div class="row me-row content-ct speaker" id="monitoring">
-          <h2 class="row-title">Monitoring</h2>
-          <a style="display:block" href="#live_status">
-          <div class="col-md-4 col-sm-6 feature link-invisible">
-            <span class="ti-signal"></span>
-            <h3>moisture measurement</h3>
-            <p>coming soon...</p>
-            <img src="static/img/vis_1.png" style="max-height:60%;max-width:60%;">
-          </div>
-          </a>
-
-          <a style="display:block" href="#monitoring">
-          <div class="col-md-4 col-sm-6 feature">
-            <span class="ti-light-bulb"></span>
-            <h3>light track</h3>
-            <p>coming soon...</p>
-            <img src="static/img/vis_2.png" style="max-height:60%;max-width:60%;">
-          </div>
-          </a>
-
-          <a style="display:block" href="#live_status">
-          <div class="col-md-4 col-sm-6 feature">
-            <span class="ti-paint-bucket"></span>
-            <h3>watering track</h3>
-            <p>coming soon...</p>
-            <img src="static/img/vis_3.png" style="max-height:60%;max-width:60%;">
-          </div>
-          </a>
-        </div>
-
-        <!-- End: monitoring -->
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="static/js/jquery.min.js"></script>

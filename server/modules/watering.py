@@ -1,9 +1,20 @@
-import RPi.GPIO as GPIO
+import os
 import time
 
+if os.name != 'nt':
+    import RPi.GPIO as GPIO
+
 class relais():
-    def __init__(self):
-        self.gpio = 10
+    def __init__(self, num=1):
+        #TODO GPIO num for other Relais
+        if num == 1:
+            self.gpio = 10
+        elif num == 2:
+            self.gpio = 101
+        elif num == 3:
+            self.gpio = 102
+        elif num == 5:
+            self.gpio = 103
 
     def initialize(self):
         try:

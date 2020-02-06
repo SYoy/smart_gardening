@@ -1,7 +1,10 @@
-import smbus
+import os
 import time
 import threading
 import datetime
+
+if os.name != 'nt':
+    import smbus
 
 
 class sensor(object):
